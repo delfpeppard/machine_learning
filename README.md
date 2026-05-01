@@ -41,17 +41,47 @@
 1. Irrelevant features
 1. Overfitting/underfitting the training data
 
+## Jupyter Notebook
 
-## Examples
+To run code on this repository, it is recommended to use Jupyter Notebook and, in particular, from a pre-built Docker image that supports the machine learning library TensorFlow.
 
-### TBD
+To pull the `jupyter/tensorflow-notebook` image into the Docker host machine:
+```bash
+docker pull quay.io/jupyter/tensorflow-notebook
+```
 
+Next, run the following `docker run` command from the folder where the project files are:
+```bash
+docker run -it --rm -p 8888:8888 -v "${PWD}":/home/jovyan/work quay.io/jupyter/tensorflow-notebook
+```
 
+This command is also in the script `jupyter_run.sh` included in this repository.
+
+For more details, go to [Jupyter Docker Stacks] documentation and [jupyter/tensorflow-notebook] source on GitHub.
+
+Files on the host's current directory (i.e. from where the container was started) will be mapped into the container as `/home/jovyan/work`.
+
+To access the Jupyter server from a web browser, go to this URL:
+```
+http://localhost:8888/lab?token=[token]
+```
+
+Note that `[token]` must be replaced by the access token that is generated after the Docker container is run (shown after `docker run` command is executed).
+
+This server can also be accessed from another host:
+```
+http://[hostname or IP address]:8888/lab?token=[token]
+```
 
 ## References
 
 - Aurelien Geron: "Hands-On Machine Learning with Scikit-Learn, Keras and TensorFlow" (O'Reilly) - 2nd. Edition
 - [Registry of Open Data on AWS]: open datasets available via AWS resources.
+- [jupyter/tensorflow-notebook] source on GitHub
+- [Jupyter Docker Stacks] documentation
 
 [Registry of Open Data on AWS]: https://registry.opendata.aws/
 
+[jupyter/tensorflow-notebook]: https://github.com/jupyter/docker-stacks/blob/main/images/tensorflow-notebook
+
+[Jupyter Docker Stacks]: https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html
